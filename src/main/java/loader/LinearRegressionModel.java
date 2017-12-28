@@ -4,7 +4,11 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.util.Collection;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import javax.xml.bind.JAXBException;
 import javax.xml.transform.Source;
@@ -13,6 +17,9 @@ import org.dmg.pmml.FieldName;
 import org.dmg.pmml.PMML;
 import org.dmg.pmml.mining.MiningModel;
 import org.dmg.pmml.regression.RegressionModel;
+import org.jpmml.evaluator.Evaluator;
+import org.jpmml.evaluator.FieldValue;
+import org.jpmml.evaluator.FieldValueUtil;
 import org.jpmml.evaluator.InputField;
 import org.jpmml.evaluator.ModelEvaluator;
 import org.jpmml.evaluator.mining.MiningModelEvaluator;
@@ -25,32 +32,32 @@ public class LinearRegressionModel {
 
 	public String path = "C://ML_models//"; //"C://Users//chris//OneDrive//Documentos//GitHub//ML_SelfHealingUtility//models//";
 	public String fileName = "CriticalityConnectivityReliability_LM.pmml";
-	private PMML PMML_model;
+	private PMML model;
+	private RegressionModelEvaluator evaluator;
 
 	public static void main(String args[]){
 
-		LinearRegressionModel lmrObject = new LinearRegressionModel();
+		LinearRegressionModel lrm = new LinearRegressionModel();
 		try {
-			lmrObject.PMML_model = lmrObject.loadModel(lmrObject.path+lmrObject.fileName);
-			lmrObject.showModelFeatures();
+			lrm.loadModel(lrm.path+lrm.fileName);
+			lrm.showModelFeatures();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
 
-
 	public void showModelFeatures(){
 
 		// create a ModelEvaluator, later being used for evaluation of the input data
-		ModelEvaluator<RegressionModel> modelEvaluator = new RegressionModelEvaluator(this.PMML_model);
-		List<InputField> requiredModelFeatures = modelEvaluator.getActiveFields();
+		this.evaluator = new RegressionModelEvaluator(this.model);
+		List<InputField> requiredModelFeatures = evaluator.getActiveFields();
 		for(InputField field : requiredModelFeatures){
 			FieldName name = field.getName();
-			System.out.println(name.toString());
+			String value = name.getValue();
+			System.out.println(value);
 		}
 	}
-
 
 
 	/**
@@ -60,25 +67,90 @@ public class LinearRegressionModel {
 	 * @return PMML
 	 * @throws Exception
 	 */
-	public PMML loadModel(final String file) throws Exception {
-
-		PMML pmml = null;
+	public void loadModel(final String file) throws Exception {
 
 		File inputFilePath = new File( file );
 
 		try( InputStream in = new FileInputStream( inputFilePath ) ){
 
 			Source source = ImportFilter.apply(new InputSource(in));
-			pmml = JAXBUtil.unmarshalPMML(source);
+			this.model = JAXBUtil.unmarshalPMML(source);
 
 		} catch( Exception e) {
 			System.out.println( e.toString() );
 			throw e;
 		}
-		return pmml;
 	}
+	
+	/**
+	 * Prepare the input data that will be used to produce a prediction with the 
+	 * model that was loaded from R.
+	 * @param evaluator the model that will called to make the prediction
+	 * @param inputMap variables that will be used to compute the prediction
+	 * @return 
+	 */
+	public Map<FieldName, FieldValue> preparePredict(Evaluator evaluator, 
+			Map<String, ?> userArguments){
+	
+		Map<FieldName, FieldValue> pmmlArguments = new LinkedHashMap<FieldName, FieldValue>();
+		
+		 List<InputField> activeFields = evaluator.getActiveFields();
+		  for(InputField activeField : activeFields){
+		    
+		    Object userValue = userArguments.get(activeField.getName().getValue());
 
+		    // The value type of the user arguments map is unknown.
+		    // An Object is converted to a String using Object#toString().
+		    // A missing value is represented by null.
+		   // FieldValue pmmlValue = evaluator.prepare(activeField, (userValue != null ? userValue.toString() : null));
 
+		    //pmmlArguments.put(activeField.getName(), pmmlValue);
+		  }
+		
+		return pmmlArguments;
+	}
+	
+	/**
+	 * Prepare the input data that will be used to produce a prediction with the 
+	 * model that was loaded from R.
+	 * @param evaluator the model that will called to make the prediction
+	 * @param inputMap variables that will be used to compute the prediction
+	 * @return 
+	 */
+	public Map<FieldName, ?> predict(Map<String, ?> userArguments){
+		
+		Map<FieldName, FieldValue> inputMap = new LinkedHashMap<FieldName, FieldValue>();
+		
+		 List<InputField> activeFields = this.evaluator.getActiveFields();
+		  for(InputField activeField : activeFields){
+			  
+			Object userValue = userArguments.get(activeField.getName().getValue());
+		    FieldValue fieldValue= FieldValueUtil.create(activeField.getField(), userValue);
+		    
+		    inputMap.put(activeField.getName(),fieldValue);
+		  }
+
+		return this.evaluator.evaluate(inputMap);
+	}
+	
+	/**
+	 * Makes one single prediction.
+	 * @param userArguments one entry to make a single prediction
+	 * @return one point estimate
+	 */
+	public Double pointPrediction(Map<String, ?> userArguments) {
+
+		Map<FieldName, ?> outcomeMap = this.predict(userArguments);
+		
+		Collection<?> set = outcomeMap.values();
+		for(Object value: set){
+			return (Double) value;
+		}
+		
+		return null;
+	}
+	
+	
 	public String getPath() {
 		return path;
 	}
@@ -94,5 +166,8 @@ public class LinearRegressionModel {
 	public void setFileName(String fileName) {
 		this.fileName = fileName;
 	}
+
+
+	
 
 }
