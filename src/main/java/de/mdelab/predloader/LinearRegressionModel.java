@@ -1,4 +1,4 @@
-package loader;
+package de.mdelab.predloader;
 
 import java.io.File;
 import java.io.FileInputStream;

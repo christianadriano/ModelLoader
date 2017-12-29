@@ -1,12 +1,12 @@
+package de.mdelab.predloader.test;
+
 import static org.junit.Assert.*;
+import org.junit.Test;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import org.dmg.pmml.PMML;
-import org.junit.Test;
-
-import loader.LinearRegressionModel;
+import de.mdelab.predloader.LinearRegressionModel;
 
 public class TestLinearRegressionModel {
 
@@ -19,7 +19,7 @@ public class TestLinearRegressionModel {
 		Double allowedDeviation = new Double(10);
 		
 		
-		LinearRegressionModel lrm = new LinearRegressionModel();
+		LinearRegressionModel lrm = new de.mdelab.predloader.LinearRegressionModel();
 			try {
 				lrm.loadModel(path+fileName);
 				System.out.println("Follow the model features:");
