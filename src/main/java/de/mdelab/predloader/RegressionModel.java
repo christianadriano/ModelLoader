@@ -22,14 +22,24 @@ import org.xml.sax.InputSource;
 
 public class RegressionModel {
 
-	public String path = "C://ML_models//"; //"C://Users//chris//OneDrive//Documentos//GitHub//ML_SelfHealingUtility//models//";
-	public String fileName = "Linear10K-xgb.pmml";//"CriticalityConnectivityReliability_LM.pmml";
+	private String path = "C://ML_models//"; //"C://Users//chris//OneDrive//Documentos//GitHub//ML_SelfHealingUtility//models//";
+	private String fileName = "Linear10K-xgb.pmml";//"CriticalityConnectivityReliability_LM.pmml";
 	private PMML model;
 	private RegressionModelEvaluator evaluator;
 
+	public RegressionModel(String pmml_fileName) {
+		this.fileName = pmml_fileName;
+	}
+
+
 	public static void main(String args[]){
 
-		RegressionModel lrm = new RegressionModel();
+		String linear_pmml_fileName = "Linear10K-xgb.pmml";
+		String discontinous_pmml_fileName = "Discontinous10K-xgb.pmml";
+		String saturating_pmml_fileName = "Saturating10K-xgb.pmml";
+		String all_pmml_fileName = "ALL10K-xgb.pmml";
+		
+		RegressionModel lrm = new RegressionModel(linear_pmml_fileName);
 		try {
 			lrm.loadModel(lrm.path+lrm.fileName);
 			lrm.showModelFeatures();
