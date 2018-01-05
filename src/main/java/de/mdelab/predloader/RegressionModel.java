@@ -20,7 +20,7 @@ import org.jpmml.model.ImportFilter;
 import org.jpmml.model.JAXBUtil;
 import org.xml.sax.InputSource;
 
-public class LinearRegressionModel {
+public class RegressionModel {
 
 	public String path = "C://ML_models//"; //"C://Users//chris//OneDrive//Documentos//GitHub//ML_SelfHealingUtility//models//";
 	public String fileName = "Linear10K-xgb.pmml";//"CriticalityConnectivityReliability_LM.pmml";
@@ -29,7 +29,7 @@ public class LinearRegressionModel {
 
 	public static void main(String args[]){
 
-		LinearRegressionModel lrm = new LinearRegressionModel();
+		RegressionModel lrm = new RegressionModel();
 		try {
 			lrm.loadModel(lrm.path+lrm.fileName);
 			lrm.showModelFeatures();

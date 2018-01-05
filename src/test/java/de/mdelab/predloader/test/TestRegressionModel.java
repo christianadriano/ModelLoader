@@ -6,9 +6,9 @@ import org.junit.Test;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import de.mdelab.predloader.LinearRegressionModel;
+import de.mdelab.predloader.RegressionModel;
 
-public class TestLinearRegressionModel {
+public class TestRegressionModel {
 
 	@Test
 	public void test() {
@@ -19,7 +19,7 @@ public class TestLinearRegressionModel {
 		Double allowedDeviation = new Double(10);
 		
 		
-		LinearRegressionModel lrm = new de.mdelab.predloader.LinearRegressionModel();
+		RegressionModel lrm = new de.mdelab.predloader.RegressionModel();
 			try {
 				lrm.loadModel(path+fileName);
 				System.out.println("Follow the model features:");
