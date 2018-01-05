@@ -2,27 +2,19 @@ package de.mdelab.predloader;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
-
-import javax.xml.bind.JAXBException;
 import javax.xml.transform.Source;
 
 import org.dmg.pmml.FieldName;
 import org.dmg.pmml.PMML;
-import org.dmg.pmml.mining.MiningModel;
-import org.dmg.pmml.regression.RegressionModel;
 import org.jpmml.evaluator.Evaluator;
 import org.jpmml.evaluator.FieldValue;
 import org.jpmml.evaluator.FieldValueUtil;
 import org.jpmml.evaluator.InputField;
-import org.jpmml.evaluator.ModelEvaluator;
-import org.jpmml.evaluator.mining.MiningModelEvaluator;
 import org.jpmml.evaluator.regression.RegressionModelEvaluator;
 import org.jpmml.model.ImportFilter;
 import org.jpmml.model.JAXBUtil;
@@ -31,7 +23,7 @@ import org.xml.sax.InputSource;
 public class LinearRegressionModel {
 
 	public String path = "C://ML_models//"; //"C://Users//chris//OneDrive//Documentos//GitHub//ML_SelfHealingUtility//models//";
-	public String fileName = "CriticalityConnectivityReliability_LM.pmml";
+	public String fileName = "Linear10K-xgb.pmml";//"CriticalityConnectivityReliability_LM.pmml";
 	private PMML model;
 	private RegressionModelEvaluator evaluator;
 
