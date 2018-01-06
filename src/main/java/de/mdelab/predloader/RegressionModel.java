@@ -16,43 +16,39 @@ import org.jpmml.evaluator.FieldValue;
 import org.jpmml.evaluator.FieldValueUtil;
 import org.jpmml.evaluator.InputField;
 import org.jpmml.evaluator.regression.RegressionModelEvaluator;
+import org.jpmml.evaluator.tree.TreeModelEvaluator;
+import org.jpmml.evaluator.mining.MiningModelEvaluator;
 import org.jpmml.model.ImportFilter;
 import org.jpmml.model.JAXBUtil;
 import org.xml.sax.InputSource;
 
 public class RegressionModel {
 
-	private String path = "C://ML_models//"; //"C://Users//chris//OneDrive//Documentos//GitHub//ML_SelfHealingUtility//models//";
+	//Instance attributes
 	private String fileName = "Linear10K-xgb.pmml";//"CriticalityConnectivityReliability_LM.pmml";
 	private PMML model;
-	private RegressionModelEvaluator evaluator;
+	//private RegressionModelEvaluator evaluator;
+	//private org.jpmml.evaluator.tree.TreeModelEvaluator evaluator;
+	org.jpmml.evaluator.mining.MiningModelEvaluator evaluator;
+	
 
-	public RegressionModel(String pmml_fileName) {
-		this.fileName = pmml_fileName;
-	}
-
-
-	public static void main(String args[]){
-
-		String linear_pmml_fileName = "Linear10K-xgb.pmml";
-		String discontinous_pmml_fileName = "Discontinous10K-xgb.pmml";
-		String saturating_pmml_fileName = "Saturating10K-xgb.pmml";
-		String all_pmml_fileName = "ALL10K-xgb.pmml";
-		
-		RegressionModel lrm = new RegressionModel(linear_pmml_fileName);
-		try {
-			lrm.loadModel(lrm.path+lrm.fileName);
-			lrm.showModelFeatures();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+	//Class attributes
+	public static String path = "C://ML_models//"; //"C://Users//chris//OneDrive//Documentos//GitHub//ML_SelfHealingUtility//models//";
+	public static String linear_pmml_fileName = "Linear10K-xgb.pmml";
+	public static String discontinous_pmml_fileName = "Discontinous10K-xgb.pmml";
+	public static String saturating_pmml_fileName = "Saturating10K-xgb.pmml";
+	public static String all_pmml_fileName = "ALL10K-xgb.pmml";
+	
+	
+	public RegressionModel(String path, String pmml_fileName) {
+		this.fileName = path + pmml_fileName;
 	}
 
 
 	public void showModelFeatures(){
 
 		// create a ModelEvaluator, later being used for evaluation of the input data
-		this.evaluator = new RegressionModelEvaluator(this.model);
+		this.evaluator = new MiningModelEvaluator(this.model);//new RegressionModelEvaluator(this.model);//TreeModelEvaluator(this.model);
 		List<InputField> requiredModelFeatures = evaluator.getActiveFields();
 		for(InputField field : requiredModelFeatures){
 			FieldName name = field.getName();
@@ -69,9 +65,9 @@ public class RegressionModel {
 	 * @return PMML
 	 * @throws Exception
 	 */
-	public void loadModel(final String file) throws Exception {
+	public void loadModel() throws Exception {
 
-		File inputFilePath = new File( file );
+		File inputFilePath = new File( this.fileName );
 
 		try( InputStream in = new FileInputStream( inputFilePath ) ){
 
@@ -140,13 +136,13 @@ public class RegressionModel {
 	 * @param userArguments one entry to make a single prediction
 	 * @return one point estimate
 	 */
-	public Double pointPrediction(Map<String, ?> userArguments) {
+	public Float pointPrediction(Map<String, ?> userArguments) {
 
 		Map<FieldName, ?> outcomeMap = this.predict(userArguments);
 		
 		Collection<?> set = outcomeMap.values();
 		for(Object value: set){
-			return (Double) value;
+			return (Float) value;
 		}
 		
 		return null;
@@ -169,6 +165,18 @@ public class RegressionModel {
 		this.fileName = fileName;
 	}
 
+
+
+	public static void main(String args[]){
+		
+		RegressionModel lrm = new RegressionModel(path, linear_pmml_fileName);
+		try {
+			lrm.loadModel();
+			lrm.showModelFeatures();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 
 	
 
