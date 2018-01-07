@@ -42,13 +42,12 @@ public class RegressionModel {
 	
 	public RegressionModel(String path, String pmml_fileName) {
 		this.fileName = path + pmml_fileName;
+		
 	}
 
 
 	public void showModelFeatures(){
 
-		// create a ModelEvaluator, later being used for evaluation of the input data
-		this.evaluator = new MiningModelEvaluator(this.model);//new RegressionModelEvaluator(this.model);//TreeModelEvaluator(this.model);
 		List<InputField> requiredModelFeatures = evaluator.getActiveFields();
 		for(InputField field : requiredModelFeatures){
 			FieldName name = field.getName();
@@ -57,6 +56,7 @@ public class RegressionModel {
 		}
 	}
 
+	
 
 	/**
 	 * Load a PMML model from the file system.
@@ -73,6 +73,9 @@ public class RegressionModel {
 
 			Source source = ImportFilter.apply(new InputSource(in));
 			this.model = JAXBUtil.unmarshalPMML(source);
+			
+			// create a ModelEvaluator, later being used for evaluation of the input data
+			this.evaluator = new MiningModelEvaluator(this.model);
 
 		} catch( Exception e) {
 			System.out.println( e.toString() );
@@ -80,33 +83,7 @@ public class RegressionModel {
 		}
 	}
 	
-	/**
-	 * Prepare the input data that will be used to produce a prediction with the 
-	 * model that was loaded from R.
-	 * @param evaluator the model that will called to make the prediction
-	 * @param inputMap variables that will be used to compute the prediction
-	 * @return 
-	 */
-	public Map<FieldName, FieldValue> preparePredict(Evaluator evaluator, 
-			Map<String, ?> userArguments){
-	
-		Map<FieldName, FieldValue> pmmlArguments = new LinkedHashMap<FieldName, FieldValue>();
-		
-		 List<InputField> activeFields = evaluator.getActiveFields();
-		  for(InputField activeField : activeFields){
-		    
-		    Object userValue = userArguments.get(activeField.getName().getValue());
 
-		    // The value type of the user arguments map is unknown.
-		    // An Object is converted to a String using Object#toString().
-		    // A missing value is represented by null.
-		   // FieldValue pmmlValue = evaluator.prepare(activeField, (userValue != null ? userValue.toString() : null));
-
-		    //pmmlArguments.put(activeField.getName(), pmmlValue);
-		  }
-		
-		return pmmlArguments;
-	}
 	
 	/**
 	 * Prepare the input data that will be used to produce a prediction with the 
@@ -176,6 +153,11 @@ public class RegressionModel {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+
+	public List<InputField> getActiveFields() {
+		return this.evaluator.getActiveFields();
 	}
 
 	
