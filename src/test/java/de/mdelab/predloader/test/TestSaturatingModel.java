@@ -16,32 +16,39 @@ public class TestSaturatingModel {
 		Double allowedDeviation = new Double(10);
 		
 		
-		RegressionModel lrm = new de.mdelab.predloader.RegressionModel(RegressionModel.path, RegressionModel.saturating_pmml_fileName);
-			try {
-				lrm.loadModel();
-				System.out.println("Follow the model features:");
-				lrm.showModelFeatures();
+		Float allowedPercentDeviation = new Float(10);
+
+
+		RegressionModel lrm = new de.mdelab.predloader.RegressionModel(
+				RegressionModel.path, RegressionModel.saturating_pmml_fileName);
+		try {
+			lrm.loadModel();
+			System.out.println("Follow the model features:");
+			lrm.showModelFeatures();
+
+			System.out.println("Allow deviation from actual value= "+allowedPercentDeviation.toString()+"%");
+
+			System.out.println("Running test");
+			Map<String,Double> userArguments = new LinkedHashMap<String,Double>();
+			
+				userArguments.put("CRITICALITY", new Double(8) );
+				userArguments.put("CONNECTIVITY", new Double(4) );
+				userArguments.put("IMPORTANCE", new Double(13) );
+				userArguments.put("REQUIRED_INTERFACE", new Double(4) );
+				userArguments.put("PROVIDED_INTERFACE", new Double(0) );
+				userArguments.put("RELIABILITY", new Double(0.5) );
+				userArguments.put("REPLICA", new Double(61) );
+				userArguments.put("REQUEST", new Double(8456) );
+				userArguments.put("PMax", new Double(17.63671044) );
+				userArguments.put("alpha", new Double(128.1755686) );
 				
-				System.out.println("Allow deviation from actual value= "+allowedDeviation.toString());
-				
-				System.out.println("Running test");
-				Map<String,Double> userArguments = new LinkedHashMap<String,Double>();
-				userArguments.put("CRITICALITY", new Double(7) );
-				userArguments.put("REQUIRED_INTERFACE", new Double(1) );
-				userArguments.put("PROVIDED_INTERFACE", new Double(9) );
-				userArguments.put("RELIABILITY", new Double(0.85) );
-				userArguments.put("REPLICA", new Double(57) );
-				userArguments.put("REQUEST", new Double(8975) );
-				userArguments.put("PMax", new Double(5.107304) );
-				userArguments.put("alpha", new Double(156.5920) );
-				
-				Double actual = 230.73344;
+				Double actual = 205.4556905;
 				
 				Float predicted = lrm.pointPrediction(userArguments);
 				System.out.println("Predicted="+predicted+", Actual="+actual);
-				 
-				Double min = actual - allowedDeviation;
-				Double max = actual + allowedDeviation;				
+
+				Double min = actual - actual*allowedPercentDeviation/100;
+				Double max = actual + actual*allowedPercentDeviation/100;				
 				assertTrue("Prediction" +predicted+ " is out of range for actual = "+ actual, predicted>= min && predicted <= max);
 				
 			} catch (Exception e) {
@@ -51,10 +58,7 @@ public class TestSaturatingModel {
 	 
 	}
 
-/* Data for testing
-
-ID		CRITICALITY RELIABILITY REPLICA	REQUEST		PMax		alpha		UTILITY_INCREASE
-2045       10       	0.5			9		397		7.680216	189.20813	192.00540
-9937        8           0.5         22  	759		16.219138	143.37735	129.75310
-4238        7           0.85		57		8975	5.107304	156.59209	230.73344
+/*
+ * FAILURE_NAME	UTILITY_DROP	AFFECTED_COMPONENT	CRITICALITY	UTILITY_INCREASE	COSTS	CONNECTIVITY	RELIABILITY	IMPORTANCE	PROVIDED_INTERFACE	REQUIRED_INTERFACE	ADT	RULE	 PMax	alpha	REPLICA	REQUEST
+CF5	25.59375349	User Management Service	8	205.4556905	0.5	4	0.5	13	0	4	1.034634314	AddReplica	17.63671044	128.1755686	61	8456
 */ 

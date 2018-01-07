@@ -56,6 +56,7 @@ public class TestLinearModel {
 
 		} catch (Exception e) {
 			e.printStackTrace();
+//			Predicted=24.87759, Actual=25.0
 		}
 	}
 
