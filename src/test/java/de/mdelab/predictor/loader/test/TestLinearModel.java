@@ -1,4 +1,4 @@
-package de.mdelab.predloader.test;
+package de.mdelab.predictor.loader.test;
 
 import static org.junit.Assert.*;
 
@@ -10,8 +10,8 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import de.mdelab.predloader.DataLoader;
-import de.mdelab.predloader.RegressionModel;
+import de.mdelab.predictor.loader.DataLoader;
+import de.mdelab.predictor.loader.RegressionModel;
 
 public class TestLinearModel {
 
@@ -24,7 +24,7 @@ public class TestLinearModel {
 		Float allowedPercentDeviation = new Float(10);
 
 
-		RegressionModel lrm = new de.mdelab.predloader.RegressionModel(
+		RegressionModel lrm = new de.mdelab.predictor.loader.RegressionModel(
 				RegressionModel.path, RegressionModel.linear_pmml_fileName);
 		try {
 			lrm.loadModel();
@@ -77,7 +77,7 @@ public class TestLinearModel {
 		Float allowedDeviation = new Float(0.15); //15% error
 		System.out.println("Allow deviation from actual value= "+allowedDeviation.toString());		
 
-		RegressionModel lrm = new de.mdelab.predloader.RegressionModel(RegressionModel.path, RegressionModel.linear_pmml_fileName);
+		RegressionModel lrm = new de.mdelab.predictor.loader.RegressionModel(RegressionModel.path, RegressionModel.linear_pmml_fileName);
 		System.out.println("Running test");
 		try {
 			lrm.loadModel();

@@ -1,4 +1,4 @@
-package de.mdelab.predloader;
+package de.mdelab.predictor.loader;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -33,9 +33,9 @@ public class RegressionModel {
 	
 
 	//Class attributes
-	public static String path = "C://ML_models//"; //"C://Users//chris//OneDrive//Documentos//GitHub//ML_SelfHealingUtility//models//";
+	public static String path = "C://ML_models//"; 
 	public static String linear_pmml_fileName = "Linear10K-xgb.pmml";
-	public static String discontinous_pmml_fileName = "Discontinous10K-xgb.pmml";
+	public static String discontinous_pmml_fileName = "Discontinuous10K-xgb.pmml";
 	public static String saturating_pmml_fileName = "Saturating10K-xgb.pmml";
 	public static String all_pmml_fileName = "ALL10K-xgb.pmml";
 	

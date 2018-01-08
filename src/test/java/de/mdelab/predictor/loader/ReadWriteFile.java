@@ -1,4 +1,4 @@
-package de.mdelab.predloader;
+package de.mdelab.predictor.loader;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
