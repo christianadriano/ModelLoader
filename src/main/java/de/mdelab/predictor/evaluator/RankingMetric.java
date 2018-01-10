@@ -4,8 +4,8 @@ import java.util.LinkedHashMap;
 
 public abstract class RankingMetric {
 
-	public static final Integer DiscountedCumulativeGain = 2;
 	public static final Integer JaccardDistance = 1;
+	public static final Integer DiscountedCumulativeGain = 2;
 	public static final Integer KendallTauCorrelation = 3;
 	
 	public static final Integer metricsList[] = {1,2,3};
