@@ -8,6 +8,8 @@ public abstract class RankingMetric {
 	public static final Integer JaccardDistance = 1;
 	public static final Integer KendallTauCorrelation = 3;
 	
+	public static final Integer metricsList[] = {1,2,3};
+	
 	/**
 	 * 
 	 * @param mapOne HashMap with the ranking position as key and name of the element as String
