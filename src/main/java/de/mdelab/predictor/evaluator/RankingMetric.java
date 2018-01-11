@@ -4,11 +4,11 @@ import java.util.LinkedHashMap;
 
 public abstract class RankingMetric {
 
-	public static final Integer JaccardDistance = 1;
-	public static final Integer DiscountedCumulativeGain = 2;
-	public static final Integer KendallTauCorrelation = 3;
+	public static final String JaccardCoefficient = "JaccardCoefficient";
+	public static final String DiscountedCumulativeGain = "DiscountedCumulativeGain";
+	public static final String KendallTauCorrelation = "KendallTauCorrelation";
 	
-	public static final Integer metricsList[] = {1,2,3};
+	public static final String metricsList[] = {JaccardCoefficient,DiscountedCumulativeGain,KendallTauCorrelation};
 	
 	/**
 	 * 
@@ -22,14 +22,16 @@ public abstract class RankingMetric {
 	 * 
 	 * @param metricType one of the three types available in this abstract class
 	 */
-	public static RankingMetric buildInstance(Integer metricType){
+	public static RankingMetric buildInstance(String metricType){
 		RankingMetric metric = null;
-		switch (metricType){
-			case 1: metric = new JaccardCoefficient();
-			case 2: metric = new DiscountedCumulativeGain();
-			case 3: metric = new KendallTauCoefficient();
-		}
-		
+		if (metricType.matches(JaccardCoefficient))
+				metric = new JaccardCoefficient();
+				else
+					if (metricType.matches(DiscountedCumulativeGain))
+						metric = new DiscountedCumulativeGain();
+					else
+						if(metricType.matches(KendallTauCorrelation))
+							metric = new KendallTauCorrelation();	
 		return metric;
 	}
 	
