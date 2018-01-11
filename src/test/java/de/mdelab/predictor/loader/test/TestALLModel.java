@@ -38,7 +38,7 @@ public class TestALLModel {
 				userArguments.put("REQUEST", new Double(3160) );
 				userArguments.put("ADT", new Double(1.211267) );
 				userArguments.put("PMax", new Double(14.02723) );
-				userArguments.put("alpha", new Double(151.5789) );
+				//userArguments.put("alpha", new Double(151.5789) );
 				
 				Double actual = 1777.455;
 				

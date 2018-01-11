@@ -34,10 +34,10 @@ public class RegressionModel {
 
 	//Class attributes
 	public static String path = "C://ML_models//"; 
-	public static String linear_pmml_fileName = "Linear10K-xgb.pmml";
-	public static String discontinous_pmml_fileName = "Discontinuous10K-xgb.pmml";
-	public static String saturating_pmml_fileName = "Saturating10K-xgb.pmml";
-	public static String all_pmml_fileName = "ALL10K-xgb.pmml";
+	public static String linear_pmml_fileName = "Linear9K-xgb.pmml";
+	public static String discontinous_pmml_fileName = "Discontinuous9K-xgb.pmml";
+	public static String saturating_pmml_fileName = "Saturating9K-xgb.pmml";
+	public static String all_pmml_fileName = "ALL9K-xgb.pmml";
 	
 	
 	public RegressionModel(String path, String pmml_fileName) {

@@ -38,7 +38,7 @@ public class TestSaturatingModel {
 				userArguments.put("REQUEST", new Double(1990) );
 				userArguments.put("ADT", new Double(1.382383) );
 				userArguments.put("PMax", new Double(17.16944) );
-				userArguments.put("alpha", new Double(93.91548) );
+				//userArguments.put("alpha", new Double(93.91548) );
 				
 				Double actual = 97.46549;
 				

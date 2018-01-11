@@ -38,7 +38,7 @@ public class TestDiscontinuousModel {
 				userArguments.put("REQUEST", new Double(618) );
 				userArguments.put("ADT", new Double(1.221895) );
 				userArguments.put("PMax", new Double(9.853348) );
-				userArguments.put("alpha", new Double(152.5462) );
+				//userArguments.put("alpha", new Double(152.5462) );
 				
 				
 				

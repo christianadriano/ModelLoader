@@ -41,7 +41,7 @@ public class TestLinearModel {
 			userArguments.put("CRITICALITY", new Double(10) );
 			userArguments.put("RELIABILITY", new Double(0.5) );
 			userArguments.put("PMax", new Double(7.680216) );
-			userArguments.put("alpha", new Double(189.2081) );
+			//userArguments.put("alpha", new Double(189.2081) );
 			userArguments.put("ADT", new Double(1.28311) );
 			userArguments.put("IMPORTANCE", new Double(10) );
 
