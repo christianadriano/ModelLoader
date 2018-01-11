@@ -30,13 +30,6 @@ public class JaccardCoefficient extends RankingMetric{
 		}
 		
 		return intersecction/union;
-	}
-
-	public JaccardCoefficient(){}
-	
-	private int countSetSize
-	
-	
-	
+	}	
 	
 }
