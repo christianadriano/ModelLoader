@@ -28,19 +28,19 @@ public class TestSaturatingModel {
 			System.out.println("Running test");
 			Map<String,Double> userArguments = new LinkedHashMap<String,Double>();
 			
-				userArguments.put("CRITICALITY", new Double(6) );
-				userArguments.put("CONNECTIVITY", new Double(2) );
+				userArguments.put("CRITICALITY", new Double(8) );
+				//userArguments.put("CONNECTIVITY", new Double(2) );
 				userArguments.put("IMPORTANCE", new Double(13) );
-				userArguments.put("REQUIRED_INTERFACE", new Double(1) );
-				userArguments.put("PROVIDED_INTERFACE", new Double(1) );
+				userArguments.put("REQUIRED_INTERFACE", new Double(4) );
+				userArguments.put("PROVIDED_INTERFACE", new Double(0) );
 				userArguments.put("RELIABILITY", new Double(0.5) );
-				userArguments.put("REPLICA", new Double(38) );
-				userArguments.put("REQUEST", new Double(1990) );
-				userArguments.put("ADT", new Double(1.382383) );
-				userArguments.put("PMax", new Double(17.16944) );
+				userArguments.put("REPLICA", new Double(61) );
+				userArguments.put("REQUEST", new Double(8456) );
+				userArguments.put("ADT", new Double(1.034634314) );
+				userArguments.put("PMax", new Double(17.63671044) );
 				//userArguments.put("alpha", new Double(93.91548) );
 				
-				Double actual = 97.46549;
+				Double actual = 205.4556905;
 				
 				Float predicted = lrm.pointPrediction(userArguments);
 				System.out.println("Predicted="+predicted+", Actual="+actual);

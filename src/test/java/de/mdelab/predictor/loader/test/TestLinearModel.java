@@ -36,16 +36,16 @@ public class TestLinearModel {
 			System.out.println("Running test");
 			Map<String,Double> userArguments = new LinkedHashMap<String,Double>();
 			userArguments.put("REQUIRED_INTERFACE", new Double(1) );
-			userArguments.put("PROVIDED_INTERFACE", new Double(0) );
-			userArguments.put("CONNECTIVITY", new Double(5) );
-			userArguments.put("CRITICALITY", new Double(10) );
+			userArguments.put("PROVIDED_INTERFACE", new Double(1) );
+			//userArguments.put("CONNECTIVITY", new Double(2) );
+			userArguments.put("CRITICALITY", new Double(8) );
 			userArguments.put("RELIABILITY", new Double(0.5) );
-			userArguments.put("PMax", new Double(7.680216) );
+			userArguments.put("PMax", new Double(16.2191377) );
 			//userArguments.put("alpha", new Double(189.2081) );
-			userArguments.put("ADT", new Double(1.28311) );
+			userArguments.put("ADT", new Double(1.144691495) );
 			userArguments.put("IMPORTANCE", new Double(10) );
 
-			Double actual = new Double(25);
+			Double actual = new Double(8);
 
 			Float predicted = lrm.pointPrediction(userArguments);
 			System.out.println("Predicted="+predicted+", Actual="+actual);

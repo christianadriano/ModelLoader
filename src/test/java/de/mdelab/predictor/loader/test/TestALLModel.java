@@ -28,19 +28,19 @@ public class TestALLModel {
 			System.out.println("Running test");
 			Map<String,Double> userArguments = new LinkedHashMap<String,Double>();
 			
-				userArguments.put("CRITICALITY", new Double(8) );
-				userArguments.put("CONNECTIVITY", new Double(4) );
+				userArguments.put("CRITICALITY", new Double(7) );
+				//userArguments.put("CONNECTIVITY", new Double(4) );
 				userArguments.put("IMPORTANCE", new Double(7) );
-				userArguments.put("REQUIRED_INTERFACE", new Double(4) );
-				userArguments.put("PROVIDED_INTERFACE", new Double(0) );
+				userArguments.put("REQUIRED_INTERFACE", new Double(0) );
+				userArguments.put("PROVIDED_INTERFACE", new Double(5) );
 				userArguments.put("RELIABILITY", new Double(0.5) );
 				userArguments.put("REPLICA", new Double(32) );
-				userArguments.put("REQUEST", new Double(3160) );
-				userArguments.put("ADT", new Double(1.211267) );
-				userArguments.put("PMax", new Double(14.02723) );
+				userArguments.put("REQUEST", new Double(744) );
+				userArguments.put("ADT", new Double(1.466900978) );
+				userArguments.put("PMax", new Double(14.73108942) );
 				//userArguments.put("alpha", new Double(151.5789) );
 				
-				Double actual = 1777.455;
+				Double actual = 1789.889445;
 				
 				Float predicted = lrm.pointPrediction(userArguments);
 				System.out.println("Predicted="+predicted+", Actual="+actual);

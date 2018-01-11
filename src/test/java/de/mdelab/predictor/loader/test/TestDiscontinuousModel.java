@@ -28,21 +28,21 @@ public class TestDiscontinuousModel {
 			System.out.println("Running test");
 			Map<String,Double> userArguments = new LinkedHashMap<String,Double>();
 			
-				userArguments.put("CRITICALITY", new Double(9) );
+				userArguments.put("CRITICALITY", new Double(10) );
 				userArguments.put("RELIABILITY", new Double(0.5) );
-				userArguments.put("CONNECTIVITY", new Double(2) );
-				userArguments.put("IMPORTANCE", new Double(1) );
-				userArguments.put("REQUIRED_INTERFACE", new Double(1) );
-				userArguments.put("PROVIDED_INTERFACE", new Double(1) );
-				userArguments.put("REPLICA", new Double(17) );
-				userArguments.put("REQUEST", new Double(618) );
-				userArguments.put("ADT", new Double(1.221895) );
-				userArguments.put("PMax", new Double(9.853348) );
+				//userArguments.put("CONNECTIVITY", new Double(5) );
+				userArguments.put("IMPORTANCE", new Double(14) );
+				userArguments.put("REQUIRED_INTERFACE", new Double(5) );
+				userArguments.put("PROVIDED_INTERFACE", new Double(0) );
+				userArguments.put("REPLICA", new Double(21) );
+				userArguments.put("REQUEST", new Double(731) );
+				userArguments.put("ADT", new Double(1.457028155) );
+				userArguments.put("PMax", new Double(7.68021606) );
 				//userArguments.put("alpha", new Double(152.5462) );
 				
 				
 				
-				Double actual = 5.78105;
+				Double actual = 405.4297184;
 				
 				Float predicted = lrm.pointPrediction(userArguments);
 				System.out.println("Predicted="+predicted+", Actual="+actual);
