@@ -86,9 +86,9 @@ public class EvaluatorController {
 	public static void main(String args[]){
 		 
 		EvaluatorController controller =  new EvaluatorController();
-		String path = "C://Users//chris//OneDrive//Documentos//GitHub//ML_SelfHealingUtility//data//Validation//";
-		String outcomeFile = "Combined_Evaluation_Metrics.csv";
-		String inputFile = "Combined_Evaluation.csv";
+		String path = "C://Users//chris//OneDrive//Documentos//GitHub//ML_SelfHealingUtility//data//Validation//5-25-50//";
+		String outcomeFile = "Saturating-6-Metric.csv";
+		String inputFile = "Saturating-6.csv";
 		LinkedHashMap<String, Cycle> cycleMap = controller.loadCyclesFromFile(path, inputFile);		
 		cycleMap = controller.computeMetrics(cycleMap);
 		controller.saveCycleMapToFile(cycleMap,path,outcomeFile);
