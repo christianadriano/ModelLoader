@@ -87,8 +87,8 @@ public class EvaluatorController {
 		 
 		EvaluatorController controller =  new EvaluatorController();
 		String path = "C://Users//chris//OneDrive//Documentos//GitHub//ML_SelfHealingUtility//data//Validation//5-25-50//";
-		String outcomeFile = "Saturating-6-Metric.csv";
-		String inputFile = "Saturating-6.csv";
+		String outcomeFile = "Combined-Ranking-10-Metric.csv";
+		String inputFile = "Combined-Ranking-10.csv";
 		LinkedHashMap<String, Cycle> cycleMap = controller.loadCyclesFromFile(path, inputFile);		
 		cycleMap = controller.computeMetrics(cycleMap);
 		controller.saveCycleMapToFile(cycleMap,path,outcomeFile);

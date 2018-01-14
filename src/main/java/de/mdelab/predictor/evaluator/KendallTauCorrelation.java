@@ -43,38 +43,38 @@ public class KendallTauCorrelation extends RankingMetric {
 	 * @param mapTwo
 	 * @return 
 	 */
-	private Double computeNumeratorKendallTau(LinkedHashMap<Integer,String> mapOne, LinkedHashMap<Integer,String> mapTwo){
+	//private Double computeNumeratorKendallTau(LinkedHashMap<Integer,String> mapOne, LinkedHashMap<Integer,String> mapTwo){
 		
-		double numerator = 0.0;
-		
-		Iterator<Integer> oneIter = mapOne.keySet().iterator();
-		Integer keyOne = oneIter
-		mapOne.
-		
-		for(Map.Entry<Integer,String> entry:mapOne.entrySet()){
-			String value = (String) entry.getValue();
-			Integer key = (Integer) entry.getKey();
-			String value2 = mapTwo.get(key);
-			if(value.matches(value2))
-				concordantPairs++;
-		}
-		
-		numer := 0
-				for i:=2..N do
-				    for j:=1..(i-1) do
-				        numer := numer + sign(x[i] - x[j]) * sign(y[i] - y[j])
-				return numer
-	}
-
-	ArrayList<Integer> convertToArrayList(LinkedHashMap<Integer,String> map){
-		
-		ArrayList<Integer> list = new ArrayList<Integer>();
-	
-		for(Map.Entry<Integer,String> entry:mapOne.entrySet()){
-			String value = (String) entry.getValue();
-			Integer key = (Integer) entry.getKey();
-			
-	}
+//		double numerator = 0.0;
+//		
+//		Iterator<Integer> oneIter = mapOne.keySet().iterator();
+//		Integer keyOne = oneIter
+//		mapOne.
+//		
+//		for(Map.Entry<Integer,String> entry:mapOne.entrySet()){
+//			String value = (String) entry.getValue();
+//			Integer key = (Integer) entry.getKey();
+//			String value2 = mapTwo.get(key);
+//			if(value.matches(value2))
+//				concordantPairs++;
+//		}
+//		
+//		numer := 0
+//				for i:=2..N do
+//				    for j:=1..(i-1) do
+//				        numer := numer + sign(x[i] - x[j]) * sign(y[i] - y[j])
+//				return numer
+//	}
+//
+//	ArrayList<Integer> convertToArrayList(LinkedHashMap<Integer,String> map){
+//		
+//		ArrayList<Integer> list = new ArrayList<Integer>();
+//	
+//		for(Map.Entry<Integer,String> entry:mapOne.entrySet()){
+//			String value = (String) entry.getValue();
+//			Integer key = (Integer) entry.getKey();
+//			
+//	}
 	
 	
 }
