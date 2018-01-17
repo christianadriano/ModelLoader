@@ -1,14 +1,15 @@
 package de.mdelab.predictor.evaluator;
 
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 
 public abstract class RankingMetric {
 
 	public static final String JaccardCoefficient = "JaccardCoefficient";
-	public static final String DiscountedCumulativeGain = "DiscountedCumulativeGain";
+	public static final String MismatchDistanceCoefficient = "MismatchDistanceCoefficient";
 	public static final String KendallTauCorrelation = "KendallTauCorrelation";
 	
-	public static final String metricsList[] = {JaccardCoefficient,DiscountedCumulativeGain,KendallTauCorrelation};
+	public static final String metricsList[] = {JaccardCoefficient,MismatchDistanceCoefficient,KendallTauCorrelation};
 	
 	/**
 	 * 
@@ -27,13 +28,15 @@ public abstract class RankingMetric {
 		if (metricType.matches(JaccardCoefficient))
 				metric = new JaccardCoefficient();
 				else
-					if (metricType.matches(DiscountedCumulativeGain))
-						metric = new DiscountedCumulativeGain();
+					if (metricType.matches(MismatchDistanceCoefficient))
+						metric = new MismatchDistanceCoefficient();
 					else
 						if(metricType.matches(KendallTauCorrelation))
 							metric = new KendallTauCorrelation();	
 		return metric;
 	}
+
+	
 	
 	
 }

@@ -13,7 +13,7 @@ import de.mdelab.predictor.loader.ReadWriteFile;
  *
  */
 public class EvaluatorController {
-
+	
 	/**
 	 * 
 	 * @param metricType see types in RankingMetric class
@@ -74,7 +74,7 @@ public class EvaluatorController {
 		Cycle cycle = cycleMap.entrySet().iterator().next().getValue();
 		fileContent.add(cycle.printHeader());
 		
-		/** For each all cycle maps compute the ranking metrics */
+		/** For each all cycle maps write the metrics values to a line in a file */
 		for(Map.Entry<String, Cycle> entry : cycleMap.entrySet()){
 			cycle = entry.getValue();
 			fileContent.add(cycle.printMetricValues());
@@ -82,13 +82,15 @@ public class EvaluatorController {
 		
 		ReadWriteFile.writeBackToBuffer(fileContent, path, destFileName);
 	}
+	
+	
 
 	public static void main(String args[]){
 		 
 		EvaluatorController controller =  new EvaluatorController();
 		String path = "C://Users//chris//OneDrive//Documentos//GitHub//ML_SelfHealingUtility//data//Validation//5-25-50//";
-		String outcomeFile = "Combined-Ranking-10-Metric.csv";
-		String inputFile = "Combined-Ranking-10.csv";
+		String outcomeFile = "Linear-Ranking-10-Metric.csv";
+		String inputFile = "Linear-Ranking-10.csv";
 		LinkedHashMap<String, Cycle> cycleMap = controller.loadCyclesFromFile(path, inputFile);		
 		cycleMap = controller.computeMetrics(cycleMap);
 		controller.saveCycleMapToFile(cycleMap,path,outcomeFile);

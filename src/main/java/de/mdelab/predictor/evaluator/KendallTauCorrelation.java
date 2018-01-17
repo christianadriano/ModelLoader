@@ -1,6 +1,8 @@
 package de.mdelab.predictor.evaluator;
 
-import java.util.Iterator;
+import org.apache.commons.math3.stat.correlation.*;
+
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -13,28 +15,103 @@ import java.util.Map;
  */
 public class KendallTauCorrelation extends RankingMetric {
 
+	//Array representations of the ranks of components
+	double rankOne[];
+	double rankTwo[];
+	
 	@Override
 	public Double compute(LinkedHashMap<Integer,String> mapOne, LinkedHashMap<Integer,String> mapTwo) {
 		
-		if(mapOne.size()!=mapTwo.size())
-			return null;
+		this.convertToArrays(mapOne, mapTwo);
+	
+		Double correlation=0.0;
 		
-		double size = mapOne.size();
-		double concordantPairs = 0;
-				
-		for(Map.Entry<Integer,String> entry:mapOne.entrySet()){
-			String value = (String) entry.getValue();
-			Integer key = (Integer) entry.getKey();
-			String value2 = mapTwo.get(key);
-			if(value.matches(value2))
-				concordantPairs++;
+		KendallsCorrelation kendall = new KendallsCorrelation();
+		try{
+			//System.out.println("rankOne: "+rankOne.toString());
+			//System.out.println("rankOne: "+rankTwo.toString());
+			correlation = kendall.correlation(rankOne,rankTwo);
+		}
+		catch(Exception e){
+			e.printStackTrace();
 		}
 		
-		double discordantPairs = size - concordantPairs;
-		double kendallTau = (concordantPairs - discordantPairs)/(size*(size-1)/2);
-		
-		return kendallTau;
+		return correlation;
 	}
+	
+	public void convertToArrays(LinkedHashMap<Integer,String> mapOne, LinkedHashMap<Integer,String> mapTwo){
+		
+		ArrayList<Double> rankOneArray = initialize (new ArrayList<Double>(),mapOne.size());
+		ArrayList<Double> rankTwoArray = initialize (new ArrayList<Double>(),mapOne.size());
+		
+		/** For each all cycle maps compute the ranking metrics */
+		for(Map.Entry<Integer, String> entry : mapOne.entrySet()){
+			String componentName = entry.getValue();
+			Integer componentRank = entry.getKey();
+			rankOneArray.set(componentRank-1, new Double(componentRank));
+			
+			Integer predictedComponentRank = (Integer) getKeyFromValue(mapTwo,componentName);
+			if(predictedComponentRank==null){ 
+				predictedComponentRank=0;
+				System.out.println("not found:"+ componentName);
+			}
+			rankTwoArray.set(componentRank-1, new Double(predictedComponentRank));
+		}
+		
+		rankOne = new double[rankOneArray.size()];
+		rankTwo = new double[rankOneArray.size()];
+		
+		for(int i=0;i<rankOneArray.size();i++){
+			rankOne[i] = rankOneArray.get(i).doubleValue();
+			rankTwo[i] = rankTwoArray.get(i).doubleValue();		
+		}
+	}
+	
+	private ArrayList<Double> initialize(ArrayList<Double> list, int size){
+		
+		for(int i=0; i<size;i++ ){
+			list.add(0.0);
+		}
+		
+		return list;
+	}
+	
+	
+	 private static Object getKeyFromValue(Map hm, Object value) {
+		    for (Object o : hm.keySet()) {
+		      if (hm.get(o).equals(value)) {
+		        return o;
+		      }
+		    }
+		    return null;
+		  }
+	 
+
+//--------------------------------------------------------------------------------------	 
+	 
+		public Double manualCompute(LinkedHashMap<Integer,String> mapOne, LinkedHashMap<Integer,String> mapTwo) {
+			
+			if(mapOne.size()!=mapTwo.size())
+				return null;
+			
+			double size = mapOne.size();
+			double concordantPairs = 0;
+					
+			for(Map.Entry<Integer,String> entry:mapOne.entrySet()){
+				String value = (String) entry.getValue();
+				Integer key = (Integer) entry.getKey();
+				String value2 = mapTwo.get(key);
+				if(value.matches(value2))
+					concordantPairs++;
+			}
+			
+			double discordantPairs = size - concordantPairs;
+			double kendallTau = (concordantPairs - discordantPairs)/(size*(size-1)/2);
+			
+			return kendallTau;
+		}
+
+	 
 	
 	/**
 	 * concordant pairs minus discordant pairs.
