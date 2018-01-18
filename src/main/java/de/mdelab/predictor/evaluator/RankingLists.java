@@ -82,6 +82,20 @@ public class RankingLists {
 		}
 		return mismatchDistances;
 	}
+
+	/** Takes the sum of the positions minus actual */
+     public double sumOfMismatchedPositions() {
+		
+		double sumMismatchedPositions = 0.0;
+		
+		for(int i=0;i<actual.length;i++){
+			if(actual[i]!=predicted[i]){
+				int weight = actual.length-(i+1);
+				sumMismatchedPositions= sumMismatchedPositions+ weight;
+			}
+		}
+		return sumMismatchedPositions;
+	}
 	
 	
 

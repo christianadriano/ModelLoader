@@ -8,8 +8,11 @@ public abstract class RankingMetric {
 	public static final String JaccardCoefficient = "JaccardCoefficient";
 	public static final String MismatchDistanceCoefficient = "MismatchDistanceCoefficient";
 	public static final String KendallTauCorrelation = "KendallTauCorrelation";
+	public static final String MismatchPositionCoefficient = "MismatchPositionCoefficient";
+	public static final String DiscountedCumulativeGain = "DiscountedCumulativeGain";
 	
-	public static final String metricsList[] = {JaccardCoefficient,MismatchDistanceCoefficient,KendallTauCorrelation};
+	
+	public static final String metricsList[] = {JaccardCoefficient,MismatchDistanceCoefficient,KendallTauCorrelation,MismatchPositionCoefficient,DiscountedCumulativeGain};
 	
 	/**
 	 * 
@@ -33,6 +36,12 @@ public abstract class RankingMetric {
 					else
 						if(metricType.matches(KendallTauCorrelation))
 							metric = new KendallTauCorrelation();	
+						else
+							if(metricType.matches(MismatchPositionCoefficient))
+								metric = new MismatchPositionCoefficient();	
+							else
+								if(metricType.matches(DiscountedCumulativeGain))
+									metric = new DiscountedCumulativeGain();	
 		return metric;
 	}
 
