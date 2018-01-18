@@ -35,7 +35,6 @@ public class KendallTauCorrelation extends RankingMetric {
 		catch(Exception e){
 			e.printStackTrace();
 		}
-		
 		return correlation;
 	}
 	

@@ -54,5 +54,4 @@ public class MismatchDistanceCoefficient extends RankingMetric{
 			return ((size*size)-1)/2;
 		}
 	}
-
 }
