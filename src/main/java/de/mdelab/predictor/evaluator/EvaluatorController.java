@@ -13,7 +13,7 @@ import de.mdelab.predictor.loader.ReadWriteFile;
  *
  */
 public class EvaluatorController {
-	
+
 	/**
 	 * 
 	 * @param metricType see types in RankingMetric class
@@ -55,7 +55,7 @@ public class EvaluatorController {
 		/** For each all cycle maps compute the ranking metrics */
 		for(Map.Entry<String, Cycle> entry : cycleMap.entrySet()){
 			Cycle cycle = entry.getValue();
-					
+
 			/** for each cycle map compute all metrics*/
 			for(String metricType:RankingMetric.metricsList){
 				RankingMetric metric = RankingMetric.buildInstance(metricType);
@@ -68,32 +68,36 @@ public class EvaluatorController {
 
 
 	public void saveCycleMapToFile(LinkedHashMap<String, Cycle> cycleMap,String path, String destFileName){
-		
+
 		ArrayList<String> fileContent = new ArrayList<String>();
-		
+
 		Cycle cycle = cycleMap.entrySet().iterator().next().getValue();
 		fileContent.add(cycle.printHeader());
-		
+
 		/** For each all cycle maps write the metrics values to a line in a file */
 		for(Map.Entry<String, Cycle> entry : cycleMap.entrySet()){
 			cycle = entry.getValue();
 			fileContent.add(cycle.printMetricValues());
 		}
-		
+
 		ReadWriteFile.writeBackToBuffer(fileContent, path, destFileName);
 	}
-	
-	
+
+
 
 	public static void main(String args[]){
-		 
+
 		EvaluatorController controller =  new EvaluatorController();
 		String path = "C://Users//chris//OneDrive//Documentos//GitHub//ML_SelfHealingUtility//data//Validation//5-25-50//";
-		String outcomeFile = "Linear-Ranking-10-Metric.csv";
-		String inputFile = "Linear-Ranking-10.csv";
-		LinkedHashMap<String, Cycle> cycleMap = controller.loadCyclesFromFile(path, inputFile);		
-		cycleMap = controller.computeMetrics(cycleMap);
-		controller.saveCycleMapToFile(cycleMap,path,outcomeFile);
+		String names[] = {"Linear","Saturating","Discontinuous","Combined"};
+
+		for(String name: names){
+			String outcomeFile = name+"-Ranking-10-Metric.csv";	
+			String inputFile = name+"-Ranking-10.csv";			
+			LinkedHashMap<String, Cycle> cycleMap = controller.loadCyclesFromFile(path, inputFile);		
+			cycleMap = controller.computeMetrics(cycleMap);
+			controller.saveCycleMapToFile(cycleMap,path,outcomeFile);
+		}
 	}
-	
+
 }
