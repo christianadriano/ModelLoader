@@ -84,20 +84,37 @@ public class EvaluatorController {
 	}
 
 
-
-	public static void main(String args[]){
-
-		EvaluatorController controller =  new EvaluatorController();
+	public void run_5_25_50(){
 		String path = "C://Users//chris//OneDrive//Documentos//GitHub//ML_SelfHealingUtility//data//Validation//5-25-50//";
 		String names[] = {"Linear","Saturating","Discontinuous","Combined"};
 
 		for(String name: names){
 			String outcomeFile = name+"-Ranking-10-Metric.csv";	
 			String inputFile = name+"-Ranking-10.csv";			
-			LinkedHashMap<String, Cycle> cycleMap = controller.loadCyclesFromFile(path, inputFile);		
-			cycleMap = controller.computeMetrics(cycleMap);
-			controller.saveCycleMapToFile(cycleMap,path,outcomeFile);
+			LinkedHashMap<String, Cycle> cycleMap = this.loadCyclesFromFile(path, inputFile);		
+			cycleMap = this.computeMetrics(cycleMap);
+			this.saveCycleMapToFile(cycleMap,path,outcomeFile);
 		}
+	}
+
+	public void run_whole_trace(){
+		String path = "C://Users//chris//OneDrive//Documentos//GitHub//ML_SelfHealingUtility//data//Validation//WholeTrace//";
+		String names[] = {"Linear","Saturating","Discontinuous","Combined"};
+
+		for(String name: names){
+			String outcomeFile = name+"-Ranking-10-Metric.csv";	
+			String inputFile = name+".csv";			
+			LinkedHashMap<String, Cycle> cycleMap = this.loadCyclesFromFile(path, inputFile);		
+			cycleMap = this.computeMetrics(cycleMap);
+			this.saveCycleMapToFile(cycleMap,path,outcomeFile);
+		}
+	}
+
+	public static void main(String args[]){
+
+		EvaluatorController controller =  new EvaluatorController();
+		controller.run_whole_trace();
+		//controller.run_5_25_50();
 	}
 
 }
