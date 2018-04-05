@@ -79,14 +79,13 @@ public class EvaluatorController {
 			cycle = entry.getValue();
 			fileContent.add(cycle.printMetricValues());
 		}
-
 		ReadWriteFile.writeBackToBuffer(fileContent, path, destFileName);
 	}
 
 
 	public void run(String datasetSize,String cycleSize){
-		String path = "C://Users//chris//OneDrive//Documentos//GitHub//ML_SelfHealingUtility//data//Ranking//" + datasetSize+"//"+cycleSize+"//";
-		String names[] = {"Linear","Saturating","Discontinuous","Combined"};
+		String path = "C://Users//Chris//Documents//GitHub//ML_SelfHealingUtility//data//Ranking//" + datasetSize+"//"+cycleSize+"//";
+		String names[] = {"Discontinuous"} ;//{"Linear","Saturating","Discontinuous","Combined"};
 
 		for(String name: names){
 			String outcomeFile = name+"_"+datasetSize+"_"+cycleSize+"-Metrics.csv";	
@@ -102,11 +101,11 @@ public class EvaluatorController {
 		EvaluatorController controller =  new EvaluatorController();
 		String datasetSizes[] = {"1K","3K","9K"};
 		String cycleSizes[] = {"5-25-50","FullTrace"};
-		for(int i=0;i<datasetSizes.length;i++){
-			for(int j=0;i<cycleSizes.length;j++){
-				controller.run(datasetSizes[1],cycleSizes[0]);
-			}
-		}
+	//	for(int i=0;i<datasetSizes.length;i++){
+	//		for(int j=0;j<cycleSizes.length;j++){
+				controller.run(datasetSizes[0],cycleSizes[1]);
+	//		}
+		//}
 	}
 
 }
