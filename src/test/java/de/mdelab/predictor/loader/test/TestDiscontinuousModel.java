@@ -44,7 +44,7 @@ public class TestDiscontinuousModel {
 				
 				Double actual = 405.4297184;
 				
-				Float predicted = lrm.pointPrediction(userArguments);
+				Double predicted = lrm.pointPrediction(userArguments);
 				System.out.println("Predicted="+predicted+", Actual="+actual);
 
 				Double min = actual - actual*allowedPercentDeviation/100;

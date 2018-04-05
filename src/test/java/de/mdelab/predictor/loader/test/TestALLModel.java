@@ -42,7 +42,7 @@ public class TestALLModel {
 				
 				Double actual = 1789.889445;
 				
-				Float predicted = lrm.pointPrediction(userArguments);
+				Double predicted = lrm.pointPrediction(userArguments);
 				System.out.println("Predicted="+predicted+", Actual="+actual);
 
 				Double min = actual - actual*allowedPercentDeviation/100;

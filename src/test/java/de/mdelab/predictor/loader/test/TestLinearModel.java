@@ -47,7 +47,7 @@ public class TestLinearModel {
 
 			Double actual = new Double(8);
 
-			Float predicted = lrm.pointPrediction(userArguments);
+			Double predicted = lrm.pointPrediction(userArguments);
 			System.out.println("Predicted="+predicted+", Actual="+actual);
 
 			Double min = actual - actual*allowedPercentDeviation/100;
@@ -102,7 +102,7 @@ public class TestLinearModel {
 				
 				
 
-				Float predicted = lrm.pointPrediction(userArguments);
+				Double predicted = lrm.pointPrediction(userArguments);
 				System.out.println("Predicted="+predicted+", Actual="+actual);
 
 				Double min = actual - allowedDeviation;
