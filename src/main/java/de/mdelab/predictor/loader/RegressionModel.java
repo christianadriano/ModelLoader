@@ -25,7 +25,7 @@ import org.xml.sax.InputSource;
 public class RegressionModel {
 
 	//Instance attributes
-	private String fileName = "Linear10K-xgb.pmml";//"CriticalityConnectivityReliability_LM.pmml";
+	private String fileName;
 	private PMML model;
 	//private RegressionModelEvaluator evaluator;
 	//private org.jpmml.evaluator.tree.TreeModelEvaluator evaluator;
@@ -34,10 +34,10 @@ public class RegressionModel {
 
 	//Class attributes
 	public static String path = "C://ML_models//"; 
-	public static String linear_pmml_fileName = "Linear3K-xgb.pmml";
-	public static String discontinous_pmml_fileName = "Discontinuous3K-xgb.pmml";
-	public static String saturating_pmml_fileName = "Saturating1K-xgb.pmml";
-	public static String all_pmml_fileName = "ALL3K-xgb.pmml";
+	public static String linear_pmml_fileName = "Linear9K-GBM.pmml";
+	public static String discontinous_pmml_fileName = "Discontinuous9K-GBM.pmml";
+	public static String saturating_pmml_fileName = "Saturating9K-GBM.pmml";
+	public static String all_pmml_fileName = "Combined9K-GBM.pmml";
 	
 	
 	public RegressionModel(String path, String pmml_fileName) {
@@ -113,13 +113,13 @@ public class RegressionModel {
 	 * @param userArguments one entry to make a single prediction
 	 * @return one point estimate
 	 */
-	public Float pointPrediction(Map<String, ?> userArguments) {
+	public Double pointPrediction(Map<String, ?> userArguments) {
 
 		Map<FieldName, ?> outcomeMap = this.predict(userArguments);
 		
 		Collection<?> set = outcomeMap.values();
 		for(Object value: set){
-			return (Float) value;
+			return (Double) value;
 		}
 		
 		return null;
