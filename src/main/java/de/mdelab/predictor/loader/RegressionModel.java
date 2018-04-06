@@ -109,17 +109,34 @@ public class RegressionModel {
 	}
 	
 	/**
-	 * Makes one single prediction.
+	 * Makes one single prediction using GBM method
 	 * @param userArguments one entry to make a single prediction
 	 * @return one point estimate
 	 */
-	public Double pointPrediction(Map<String, ?> userArguments) {
+	public Double pointPrediction_GBM(Map<String, ?> userArguments) {
 
 		Map<FieldName, ?> outcomeMap = this.predict(userArguments);
 		
 		Collection<?> set = outcomeMap.values();
 		for(Object value: set){
 			return (Double) value;
+		}
+		
+		return null;
+	}
+	
+	/**
+	 * Makes one single prediction using XGBoostTree method
+	 * @param userArguments one entry to make a single prediction
+	 * @return one point estimate
+	 */
+	public Float pointPrediction_XGB(Map<String, ?> userArguments) {
+
+		Map<FieldName, ?> outcomeMap = this.predict(userArguments);
+		
+		Collection<?> set = outcomeMap.values();
+		for(Object value: set){
+			return (Float) value;
 		}
 		
 		return null;
