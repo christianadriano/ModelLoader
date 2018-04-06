@@ -42,7 +42,7 @@ public class TestSaturatingModel {
 				
 				Double actual = 205.4556905;
 				
-				Double predicted = lrm.pointPrediction(userArguments);
+				Double predicted = lrm.pointPrediction_GBM(userArguments);
 				System.out.println("Predicted="+predicted+", Actual="+actual);
 
 				Double min = actual - actual*allowedPercentDeviation/100;
