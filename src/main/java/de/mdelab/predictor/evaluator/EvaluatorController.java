@@ -83,10 +83,11 @@ public class EvaluatorController {
 	}
 
 
-	public void run(String datasetSize,String cycleSize){
-		String path = "C://Users//Chris//Documents//GitHub//ML_SelfHealingUtility//data//Ranking//" + datasetSize+"//"+cycleSize+"//";
-		String names[] = {"Discontinuous"} ;//{"Linear","Saturating","Discontinuous","Combined"};
-
+	public void run(String datasetSize,String cycleSize, String methodType){
+		
+		String path = "C://Users//Chris//Documents//GitHub//ML_SelfHealingUtility//data//2nd_Experiment//Ranking//" + datasetSize+"//"+cycleSize+"//"+methodType+"//";
+		String names[] = {"Discontinuous"};//{"Linear","Saturating","Discontinuous","Combined"};
+		
 		for(String name: names){
 			String outcomeFile = name+"_"+datasetSize+"_"+cycleSize+"-Metrics.csv";	
 			String inputFile = name+".csv";			
@@ -101,9 +102,10 @@ public class EvaluatorController {
 		EvaluatorController controller =  new EvaluatorController();
 		String datasetSizes[] = {"1K","3K","9K"};
 		String cycleSizes[] = {"5-25-50","FullTrace"};
+		String methodType[] = {"XGB","GBM","LightGBM"};
 	//	for(int i=0;i<datasetSizes.length;i++){
 	//		for(int j=0;j<cycleSizes.length;j++){
-				controller.run(datasetSizes[0],cycleSizes[1]);
+				controller.run(datasetSizes[2],cycleSizes[0],methodType[1]);
 	//		}
 		//}
 	}
