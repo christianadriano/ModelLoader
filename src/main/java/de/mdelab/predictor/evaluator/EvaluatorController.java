@@ -102,10 +102,10 @@ public class EvaluatorController {
 		EvaluatorController controller =  new EvaluatorController();
 		String datasetSizes[] = {"1K","3K","9K"};
 		String cycleSizes[] = {"5-25-50","FullTrace"};
-		String methodType[] = {"XGB","GBM","LightGBM"};
+		String methodType[] = {"XGB","GBM","RF"};
 	//	for(int i=0;i<datasetSizes.length;i++){
 	//		for(int j=0;j<cycleSizes.length;j++){
-				controller.run(datasetSizes[2],cycleSizes[0],methodType[1]);
+				controller.run(datasetSizes[2],cycleSizes[0],methodType[2]);
 	//		}
 		//}
 	}
