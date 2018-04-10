@@ -17,7 +17,9 @@ public class TestDiscontinuousModel {
 
 
 		RegressionModel lrm = new de.mdelab.predictor.loader.RegressionModel(
-				RegressionModel.path, RegressionModel.discontinous_pmml_fileName);
+				RegressionModel.RANDOM_FOREST, 
+				RegressionModel.Discontinuous,
+				RegressionModel.Size_9K);
 		try {
 			lrm.loadModel();
 			System.out.println("Follow the model features:");

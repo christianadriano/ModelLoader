@@ -17,7 +17,9 @@ public class TestSaturatingModel {
 
 
 		RegressionModel lrm = new de.mdelab.predictor.loader.RegressionModel(
-				RegressionModel.path, RegressionModel.saturating_pmml_fileName);
+												RegressionModel.RANDOM_FOREST, 
+												RegressionModel.Saturating,
+												RegressionModel.Size_9K);
 		try {
 			lrm.loadModel();
 			System.out.println("Follow the model features:");
@@ -42,7 +44,7 @@ public class TestSaturatingModel {
 				
 				Double actual = 205.4556905;
 				
-				Double predicted = lrm.pointPrediction_GBM(userArguments);
+				Double predicted = lrm.pointPrediction_RF(userArguments);
 				System.out.println("Predicted="+predicted+", Actual="+actual);
 
 				Double min = actual - actual*allowedPercentDeviation/100;

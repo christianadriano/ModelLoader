@@ -15,17 +15,20 @@ import de.mdelab.predictor.loader.RegressionModel;
 
 public class TestLinearModel {
 
+	//Data for the ACTUAL Values
 	private static String path = "C://Users//chris//MachineLearning//ModelLoader//src//test//resources//";
 	private static String fileName = "Linear10K.csv";
 
 	@Test
 	public void testHardcoded() {
 
-		Float allowedPercentDeviation = new Float(10);
-
+		Float allowedPercentDeviation = new Float(15);
 
 		RegressionModel lrm = new de.mdelab.predictor.loader.RegressionModel(
-				RegressionModel.path, RegressionModel.linear_pmml_fileName);
+				RegressionModel.RANDOM_FOREST, 
+				RegressionModel.Linear,
+				RegressionModel.Size_9K);
+
 		try {
 			lrm.loadModel();
 			System.out.println("Follow the model features:");
@@ -35,19 +38,20 @@ public class TestLinearModel {
 
 			System.out.println("Running test");
 			Map<String,Double> userArguments = new LinkedHashMap<String,Double>();
-			userArguments.put("REQUIRED_INTERFACE", new Double(1) );
-			userArguments.put("PROVIDED_INTERFACE", new Double(1) );
-			//userArguments.put("CONNECTIVITY", new Double(2) );
-			userArguments.put("CRITICALITY", new Double(8) );
+			userArguments.put("REQUIRED_INTERFACE", new Double(0) );
+			userArguments.put("PROVIDED_INTERFACE", new Double(5) );
+			userArguments.put("CONNECTIVITY", new Double(5) );
+			userArguments.put("CRITICALITY", new Double(10) );
 			userArguments.put("RELIABILITY", new Double(0.5) );
-			userArguments.put("PMax", new Double(16.2191377) );
-			//userArguments.put("alpha", new Double(189.2081) );
-			userArguments.put("ADT", new Double(1.144691495) );
+			userArguments.put("PMax", new Double(7.680216) );
+			userArguments.put("alpha", new Double(189.2081) );
+			userArguments.put("ADT", new Double(1.28311) );
 			userArguments.put("IMPORTANCE", new Double(10) );
+			userArguments.put("REPLICA", new Double(14) );
+			userArguments.put("REQUEST", new Double(654) );
 
-			Double actual = new Double(8);
-
-			Double predicted = lrm.pointPrediction_GBM(userArguments);
+			Double actual = new Double(25);
+			Double predicted = lrm.pointPrediction_RF(userArguments);
 			System.out.println("Predicted="+predicted+", Actual="+actual);
 
 			Double min = actual - actual*allowedPercentDeviation/100;
@@ -56,7 +60,7 @@ public class TestLinearModel {
 
 		} catch (Exception e) {
 			e.printStackTrace();
-//			Predicted=24.87759, Actual=25.0
+			//RANDOM FOREST = Predicted=27.60896666666669, Actual=25.0
 		}
 	}
 
@@ -77,7 +81,11 @@ public class TestLinearModel {
 		Float allowedDeviation = new Float(0.15); //15% error
 		System.out.println("Allow deviation from actual value= "+allowedDeviation.toString());		
 
-		RegressionModel lrm = new de.mdelab.predictor.loader.RegressionModel(RegressionModel.path, RegressionModel.linear_pmml_fileName);
+		RegressionModel lrm = new de.mdelab.predictor.loader.RegressionModel(
+				RegressionModel.RANDOM_FOREST, 
+				RegressionModel.Linear,
+				RegressionModel.Size_9K);
+		
 		System.out.println("Running test");
 		try {
 			lrm.loadModel();
