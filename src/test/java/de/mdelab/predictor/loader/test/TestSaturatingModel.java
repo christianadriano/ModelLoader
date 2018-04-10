@@ -31,7 +31,7 @@ public class TestSaturatingModel {
 			Map<String,Double> userArguments = new LinkedHashMap<String,Double>();
 			
 				userArguments.put("CRITICALITY", new Double(8) );
-				//userArguments.put("CONNECTIVITY", new Double(2) );
+				userArguments.put("CONNECTIVITY", new Double(4) );
 				userArguments.put("IMPORTANCE", new Double(13) );
 				userArguments.put("REQUIRED_INTERFACE", new Double(4) );
 				userArguments.put("PROVIDED_INTERFACE", new Double(0) );
@@ -40,7 +40,7 @@ public class TestSaturatingModel {
 				userArguments.put("REQUEST", new Double(8456) );
 				userArguments.put("ADT", new Double(1.034634314) );
 				userArguments.put("PMax", new Double(17.63671044) );
-				//userArguments.put("alpha", new Double(93.91548) );
+				userArguments.put("alpha", new Double(128.1755686) );
 				
 				Double actual = 205.4556905;
 				
@@ -59,6 +59,16 @@ public class TestSaturatingModel {
 	}
  
 
+
+/*
+* FAILURE_NAME	AFFECTED_COMPONENT	CRITICALITY	UTILITY_INCREASE	COSTS	CONNECTIVITY	RELIABILITY
+	CF5			User Management 	8			205.4556905			0.5			4			0.5
+
+*IMPORTANCE	PROVIDED_INTERFACE	REQUIRED_INTERFACE	ADT			RULE	 	PMax		alpha	REPLICA	REQUEST
+*	13			0					4			1.034634314	AddReplica	17.63671044	128.1755686		61		8456
+*/
+
+
 /*
 CRITICALITY RELIABILITY CONNECTIVITY IMPORTANCE PROVIDED_INTERFACE REQUIRED_INTERFACE REPLICA
      6         0.5            2         13                  1                  1      38
@@ -72,14 +82,4 @@ CRITICALITY RELIABILITY CONNECTIVITY IMPORTANCE PROVIDED_INTERFACE REQUIRED_INTE
 REQUEST      ADT    	 PMax   	 alpha 			UTILITY_INCREASE
    618 		1.221895 	9.853348 	152.5462          5.78105
 
-*/
-
-
-
-/*
-* FAILURE_NAME	UTILITY_DROP	AFFECTED_COMPONENT	CRITICALITY	UTILITY_INCREASE	COSTS	CONNECTIVITY	
-	CF5			25.59375349		User Management 	8			205.4556905			0.5			4			
-
-*RELIABILITY	IMPORTANCE	PROVIDED_INTERFACE	REQUIRED_INTERFACE	ADT			RULE	 	PMax		alpha			REPLICA	REQUEST
-*0.5			13			0					4					1.034634314	AddReplica	17.63671044	128.1755686		61		8456
 */

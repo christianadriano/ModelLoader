@@ -31,7 +31,7 @@ public class TestCombinedModel {
 			Map<String,Double> userArguments = new LinkedHashMap<String,Double>();
 			
 				userArguments.put("CRITICALITY", new Double(7) );
-				//userArguments.put("CONNECTIVITY", new Double(4) );
+				userArguments.put("CONNECTIVITY", new Double(4) );
 				userArguments.put("IMPORTANCE", new Double(7) );
 				userArguments.put("REQUIRED_INTERFACE", new Double(0) );
 				userArguments.put("PROVIDED_INTERFACE", new Double(5) );
@@ -40,7 +40,7 @@ public class TestCombinedModel {
 				userArguments.put("REQUEST", new Double(744) );
 				userArguments.put("ADT", new Double(1.466900978) );
 				userArguments.put("PMax", new Double(14.73108942) );
-				//userArguments.put("alpha", new Double(151.5789) );
+				userArguments.put("alpha", new Double(151.5789) );
 				
 				Double actual = 1789.889445;
 				
